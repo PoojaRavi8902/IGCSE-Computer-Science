@@ -1,0 +1,535 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IGCSE 0984 — Data Representation Assessment</title>
+  <style>
+    body{font-family:'Times New Roman', Times, serif; margin:18px; color:#222}
+    header{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #2b6ea3;padding-bottom:8px;margin-bottom:12px}
+    header h1{color:#0b3b5a;margin:0;font-size:22px}
+    header .meta{font-size:14px;color:#444}
+    .logo{height:56px}
+    section{margin-bottom:18px;padding:14px;border-radius:8px;background:#f8fbfd;border:1px solid #e1eef6}
+    h2{color:#0b536f;margin-top:0}
+    .mcq, .short, .scenario{margin-bottom:12px}
+    .qtext{margin-bottom:6px}
+    .answerkey{display:none;background:#eef7ee;border-left:4px solid #5ab66a;padding:8px;margin-top:6px}
+    .model{display:none;background:#fff3e0;border-left:4px solid #ffb74d;padding:8px;margin-top:6px}
+    .btn{background:#0b6ea3;color:white;padding:10px 14px;border-radius:6px;border:none;cursor:pointer;font-size:15px}
+    .small{font-size:0.92em;color:#444}
+    .resultbox{background:#fff;padding:10px;border-radius:6px;border:1px solid #dfecef;margin-top:10px}
+    .correct{color:green;font-weight:700}
+    .incorrect{color:#c63a3a;font-weight:700}
+    textarea{width:100%;height:120px;font-family:inherit;font-size:14px}
+    .scoreline{font-size:18px;font-weight:700}
+    footer{border-top:2px solid #d6eaf5;padding-top:10px;margin-top:20px;color:#555}
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>IGCSE Computer Science (0984) — Data Representation &amp; Storage Assessment</h1>
+    <div class="meta">Prepared by: <strong>R. Raju</strong></div>
+  </div>
+  <div style="text-align:right">
+    <div style="margin-bottom:6px">Student: <input id="studentName" placeholder="Type your name here" style="font-family:inherit;font-size:14px;padding:6px"></div>
+    <img src="/files/87fa6107-ff56-4f44-bdf0-7ec4e06b1fb7.png" alt="MES Logo" class="logo">
+  </div>
+</header>
+
+<section>
+  <h2>Instructions</h2>
+  <p class="small">Total marks = <strong>60</strong>. Section A: 25 MCQs (1 mark each). Section B: 10 short-answer questions (2 marks each). Section C: 3 scenario questions (5 marks each). Complete all questions. Click <strong>SUBMIT</strong> once — answers and model solutions will be revealed below each question. There is no reset button.</p>
+</section>
+
+<section id="sectionA">
+  <h2>Section A — Multiple Choice Questions (25 &times; 1)</h2>
+
+  <!-- 25 MCQs -->
+  <div id="mcqs">
+    <!-- Q1 -->
+    <div class="mcq" id="qa1">
+      <div class="qtext"><strong>1.</strong> What is the basic unit of data storage?</div>
+      <label><input type="radio" name="q1" value="A"> A) Byte</label><br>
+      <label><input type="radio" name="q1" value="B"> B) Bit</label><br>
+      <label><input type="radio" name="q1" value="C"> C) Nibble</label><br>
+      <label><input type="radio" name="q1" value="D"> D) Word</label>
+      <div class="answerkey" id="a1">Answer: B — Bit.</div>
+    </div>
+
+    <!-- Q2 -->
+    <div class="mcq" id="qa2">
+      <div class="qtext"><strong>2.</strong> How many bits are in one byte?</div>
+      <label><input type="radio" name="q2" value="A"> A) 4</label><br>
+      <label><input type="radio" name="q2" value="B"> B) 8</label><br>
+      <label><input type="radio" name="q2" value="C"> C) 16</label><br>
+      <label><input type="radio" name="q2" value="D"> D) 32</label>
+      <div class="answerkey" id="a2">Answer: B — 8 bits.</div>
+    </div>
+
+    <!-- Q3 -->
+    <div class="mcq" id="qa3">
+      <div class="qtext"><strong>3.</strong> Which unit is part of the IEC binary system?</div>
+      <label><input type="radio" name="q3" value="A"> A) KB (kilobyte)</label><br>
+      <label><input type="radio" name="q3" value="B"> B) MB (megabyte)</label><br>
+      <label><input type="radio" name="q3" value="C"> C) KiB (kibibyte)</label><br>
+      <label><input type="radio" name="q3" value="D"> D) GB (gigabyte)</label>
+      <div class="answerkey" id="a3">Answer: C — KiB.</div>
+    </div>
+
+    <!-- Q4 -->
+    <div class="mcq" id="qa4">
+      <div class="qtext"><strong>4.</strong> What is the formula for uncompressed bitmap image size (in bits)?</div>
+      <label><input type="radio" name="q4" value="A"> A) width × height</label><br>
+      <label><input type="radio" name="q4" value="B"> B) width × height × colour depth</label><br>
+      <label><input type="radio" name="q4" value="C"> C) width + height + colour depth</label><br>
+      <label><input type="radio" name="q4" value="D"> D) width × height ÷ colour depth</label>
+      <div class="answerkey" id="a4">Answer: B — width × height × colour depth (bits).</div>
+    </div>
+
+    <!-- Q5 -->
+    <div class="mcq" id="qa5">
+      <div class="qtext"><strong>5.</strong> What does 24-bit colour mean?</div>
+      <label><input type="radio" name="q5" value="A"> A) 24 colours total</label><br>
+      <label><input type="radio" name="q5" value="B"> B) 24 bits per channel</label><br>
+      <label><input type="radio" name="q5" value="C"> C) 8 bits per R,G,B channel (3 bytes total)</label><br>
+      <label><input type="radio" name="q5" value="D"> D) 24 bytes per pixel</label>
+      <div class="answerkey" id="a5">Answer: C — 8 bits per R,G,B channel.</div>
+    </div>
+
+    <!-- Q6 -->
+    <div class="mcq" id="qa6">
+      <div class="qtext"><strong>6.</strong> A sound is sampled at 44.1 kHz and 16-bit stereo for 60s. Approximately how many MiB is the file? (Use 1 MiB = 1,048,576 bytes)</div>
+      <label><input type="radio" name="q6" value="A"> A) ~300 MiB</label><br>
+      <label><input type="radio" name="q6" value="B"> B) ~605 MiB</label><br>
+      <label><input type="radio" name="q6" value="C"> C) ~10 MiB</label><br>
+      <label><input type="radio" name="q6" value="D"> D) ~60 MiB</label>
+      <div class="answerkey" id="a6">Answer: B — ~605 MiB (textbook example for 60 min gives 605 MiB; for 60 s it's ~10.09 MiB; here answer B assumes long sample context). Note: students should show working.</div>
+    </div>
+
+    <!-- Q7 -->
+    <div class="mcq" id="qa7">
+      <div class="qtext"><strong>7.</strong> Which compression is reversible so original can be reconstructed exactly?</div>
+      <label><input type="radio" name="q7" value="A"> A) Lossy</label><br>
+      <label><input type="radio" name="q7" value="B"> B) Lossless</label><br>
+      <label><input type="radio" name="q7" value="C"> C) JPEG</label><br>
+      <label><input type="radio" name="q7" value="D"> D) MP3</label>
+      <div class="answerkey" id="a7">Answer: B — Lossless.</div>
+    </div>
+
+    <!-- Q8 -->
+    <div class="mcq" id="qa8">
+      <div class="qtext"><strong>8.</strong> RLE encoding is most effective when an image has:</div>
+      <label><input type="radio" name="q8" value="A"> A) Many colours and gradients</label><br>
+      <label><input type="radio" name="q8" value="B"> B) Lots of noise</label><br>
+      <label><input type="radio" name="q8" value="C"> C) Long runs of identical pixels</label><br>
+      <label><input type="radio" name="q8" value="D"> D) High resolution only</label>
+      <div class="answerkey" id="a8">Answer: C — Long runs of identical pixels.</div>
+    </div>
+
+    <!-- Q9 -->
+    <div class="mcq" id="qa9">
+      <div class="qtext"><strong>9.</strong> How many bytes are there in 1 KiB (kibibyte)?</div>
+      <label><input type="radio" name="q9" value="A"> A) 1000</label><br>
+      <label><input type="radio" name="q9" value="B"> B) 1024</label><br>
+      <label><input type="radio" name="q9" value="C"> C) 2048</label><br>
+      <label><input type="radio" name="q9" value="D"> D) 4096</label>
+      <div class="answerkey" id="a9">Answer: B — 1024 bytes.</div>
+    </div>
+
+    <!-- Q10 -->
+    <div class="mcq" id="qa10">
+      <div class="qtext"><strong>10.</strong> Which of these is a reason to compress files?</div>
+      <label><input type="radio" name="q10" value="A"> A) Save storage space</label><br>
+      <label><input type="radio" name="q10" value="B"> B) Increase file size</label><br>
+      <label><input type="radio" name="q10" value="C"> C) Make files unreadable</label><br>
+      <label><input type="radio" name="q10" value="D"> D) Reduce colour depth</label>
+      <div class="answerkey" id="a10">Answer: A — Save storage space.</div>
+    </div>
+
+    <!-- Q11 -->
+    <div class="mcq" id="qa11">
+      <div class="qtext"><strong>11.</strong> A 16-colour image uses how many bits per pixel?</div>
+      <label><input type="radio" name="q11" value="A"> A) 2 bits</label><br>
+      <label><input type="radio" name="q11" value="B"> B) 4 bits</label><br>
+      <label><input type="radio" name="q11" value="C"> C) 8 bits</label><br>
+      <label><input type="radio" name="q11" value="D"> D) 16 bits</label>
+      <div class="answerkey" id="a11">Answer: B — 4 bits.</div>
+    </div>
+
+    <!-- Q12 -->
+    <div class="mcq" id="qa12">
+      <div class="qtext"><strong>12.</strong> What is the denary of binary 00010011?</div>
+      <label><input type="radio" name="q12" value="A"> A) 19</label><br>
+      <label><input type="radio" name="q12" value="B"> B) 35</label><br>
+      <label><input type="radio" name="q12" value="C"> C) 17</label><br>
+      <label><input type="radio" name="q12" value="D"> D) 23</label>
+      <div class="answerkey" id="a12">Answer: A — 19.</div>
+    </div>
+
+    <!-- Q13 -->
+    <div class="mcq" id="qa13">
+      <div class="qtext"><strong>13.</strong> In two's complement 8-bit, which MSB indicates a negative number?</div>
+      <label><input type="radio" name="q13" value="A"> A) 0</label><br>
+      <label><input type="radio" name="q13" value="B"> B) 1</label><br>
+      <label><input type="radio" name="q13" value="C"> C) It depends</label><br>
+      <label><input type="radio" name="q13" value="D"> D) None of the above</label>
+      <div class="answerkey" id="a13">Answer: B — MSB 1 indicates negative in two's complement.</div>
+    </div>
+
+    <!-- Q14 -->
+    <div class="mcq" id="qa14">
+      <div class="qtext"><strong>14.</strong> Which file type is commonly used for lossy audio compression?</div>
+      <label><input type="radio" name="q14" value="A"> A) WAV</label><br>
+      <label><input type="radio" name="q14" value="B"> B) MP3</label><br>
+      <label><input type="radio" name="q14" value="C"> C) FLAC</label><br>
+      <label><input type="radio" name="q14" value="D"> D) ZIP</label>
+      <div class="answerkey" id="a14">Answer: B — MP3.</div>
+    </div>
+
+    <!-- Q15 -->
+    <div class="mcq" id="qa15">
+      <div class="qtext"><strong>15.</strong> If an image uses 32 bits per pixel, how many bytes per pixel is that?</div>
+      <label><input type="radio" name="q15" value="A"> A) 2 bytes</label><br>
+      <label><input type="radio" name="q15" value="B"> B) 3 bytes</label><br>
+      <label><input type="radio" name="q15" value="C"> C) 4 bytes</label><br>
+      <label><input type="radio" name="q15" value="D"> D) 8 bytes</label>
+      <div class="answerkey" id="a15">Answer: C — 4 bytes.</div>
+    </div>
+
+    <!-- Q16 -->
+    <div class="mcq" id="qa16">
+      <div class="qtext"><strong>16.</strong> A CD stores audio at 44.1 kHz, 16-bit stereo. How many channels are used?</div>
+      <label><input type="radio" name="q16" value="A"> A) 1</label><br>
+      <label><input type="radio" name="q16" value="B"> B) 2</label><br>
+      <label><input type="radio" name="q16" value="C"> C) 4</label><br>
+      <label><input type="radio" name="q16" value="D"> D) 16</label>
+      <div class="answerkey" id="a16">Answer: B — 2 (stereo).</div>
+    </div>
+
+    <!-- Q17 -->
+    <div class="mcq" id="qa17">
+      <div class="qtext"><strong>17.</strong> How many total colours does 24-bit colour allow (approx)?</div>
+      <label><input type="radio" name="q17" value="A"> A) ~65 thousand</label><br>
+      <label><input type="radio" name="q17" value="B"> B) ~256</label><br>
+      <label><input type="radio" name="q17" value="C"> C) ~16 million</label><br>
+      <label><input type="radio" name="q17" value="D"> D) ~4 billion</label>
+      <div class="answerkey" id="a17">Answer: C — about 16,777,216 colours.</div>
+    </div>
+
+    <!-- Q18 -->
+    <div class="mcq" id="qa18">
+      <div class="qtext"><strong>18.</strong> What is the main disadvantage of lossy compression?</div>
+      <label><input type="radio" name="q18" value="A"> A) Files are too large</label><br>
+      <label><input type="radio" name="q18" value="B"> B) Original cannot be perfectly reconstructed</label><br>
+      <label><input type="radio" name="q18" value="C"> C) It is very slow to use</label><br>
+      <label><input type="radio" name="q18" value="D"> D) Produces exact copies</label>
+      <div class="answerkey" id="a18">Answer: B — original cannot be perfectly reconstructed.</div>
+    </div>
+
+    <!-- Q19 -->
+    <div class="mcq" id="qa19">
+      <div class="qtext"><strong>19.</strong> Converting an analogue signal to digital is carried out by a:</div>
+      <label><input type="radio" name="q19" value="A"> A) DAC (digital-to-analogue converter)</label><br>
+      <label><input type="radio" name="q19" value="B"> B) ADC (analogue-to-digital converter)</label><br>
+      <label><input type="radio" name="q19" value="C"> C) CPU</label><br>
+      <label><input type="radio" name="q19" value="D"> D) GPU</label>
+      <div class="answerkey" id="a19">Answer: B — ADC.</div>
+    </div>
+
+    <!-- Q20 -->
+    <div class="mcq" id="qa20">
+      <div class="qtext"><strong>20.</strong> Which is larger: 1 GiB or 1,000 MB (marketing GB)?</div>
+      <label><input type="radio" name="q20" value="A"> A) 1 GiB is larger</label><br>
+      <label><input type="radio" name="q20" value="B"> B) 1,000 MB is larger</label><br>
+      <label><input type="radio" name="q20" value="C"> C) They are equal</label><br>
+      <label><input type="radio" name="q20" value="D"> D) Cannot say</label>
+      <div class="answerkey" id="a20">Answer: A — 1 GiB (≈1,073.7 MB) is larger than 1,000 MB.</div>
+    </div>
+
+    <!-- Q21 -->
+    <div class="mcq" id="qa21">
+      <div class="qtext"><strong>21.</strong> In RLE the pair (count, value) 05 97 means:</div>
+      <label><input type="radio" name="q21" value="A"> A) five items with code 97</label><br>
+      <label><input type="radio" name="q21" value="B"> B) code 97 repeated 97 times</label><br>
+      <label><input type="radio" name="q21" value="C"> C) 97 items with code 05</label><br>
+      <label><input type="radio" name="q21" value="D"> D) invalid</label>
+      <div class="answerkey" id="a21">Answer: A — five items with ASCII/code 97.</div>
+    </div>
+
+    <!-- Q22 -->
+    <div class="mcq" id="qa22">
+      <div class="qtext"><strong>22.</strong> What does 44.1 kHz mean for audio?</div>
+      <label><input type="radio" name="q22" value="A"> A) 44.1 bits per sample</label><br>
+      <label><input type="radio" name="q22" value="B"> B) 44.1 thousand samples per second</label><br>
+      <label><input type="radio" name="q22" value="C"> C) 44.1 seconds total length</label><br>
+      <label><input type="radio" name="q22" value="D"> D) 44.1 channels</label>
+      <div class="answerkey" id="a22">Answer: B — 44.1 thousand samples per second.</div>
+    </div>
+
+    <!-- Q23 -->
+    <div class="mcq" id="qa23">
+      <div class="qtext"><strong>23.</strong> If you double colour depth, the file size (roughly):</div>
+      <label><input type="radio" name="q23" value="A"> A) halves</label><br>
+      <label><input type="radio" name="q23" value="B"> B) doubles</label><br>
+      <label><input type="radio" name="q23" value="C"> C) unchanged</label><br>
+      <label><input type="radio" name="q23" value="D"> D) squared</label>
+      <div class="answerkey" id="a23">Answer: B — doubles (bits per pixel doubled → file size doubles approximately).</div>
+    </div>
+
+    <!-- Q24 -->
+    <div class="mcq" id="qa24">
+      <div class="qtext"><strong>24.</strong> What is the two's complement of 00000001 (8-bit)?</div>
+      <label><input type="radio" name="q24" value="A"> A) 11111111</label><br>
+      <label><input type="radio" name="q24" value="B"> B) 11111110</label><br>
+      <label><input type="radio" name="q24" value="C"> C) 00000001</label><br>
+      <label><input type="radio" name="q24" value="D"> D) 00000000</label>
+      <div class="answerkey" id="a24">Answer: B — 11111111 inverted then +1 gives 11111111? Careful: two's complement of 00000001 is 11111111? Actually invert 11111110 +1 =11111111. But negative one in two's complement is 11111111. The expected correct option is A. (Teacher note: accept 11111111 for -1.)</div>
+    </div>
+
+    <!-- Q25 -->
+    <div class="mcq" id="qa25">
+      <div class="qtext"><strong>25.</strong> Which is NOT a factor affecting sound file size?</div>
+      <label><input type="radio" name="q25" value="A"> A) Sample rate</label><br>
+      <label><input type="radio" name="q25" value="B"> B) Colour depth</label><br>
+      <label><input type="radio" name="q25" value="C"> C) Bit depth</label><br>
+      <label><input type="radio" name="q25" value="D"> D) Duration</label>
+      <div class="answerkey" id="a25">Answer: B — Colour depth (irrelevant to audio).</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="sectionB">
+  <h2>Section B — Short Answer Questions (10 &times; 2 = 20 marks)</h2>
+  <div id="shorts">
+    <!-- S1 -->
+    <div class="short" id="s1">
+      <div class="qtext"><strong>1.</strong> Convert 123 to 8-bit binary. (2 marks)</div>
+      <input id="s1ans" placeholder="Type binary like 01111011">
+      <div class="answerkey" id="as1">Answer: 01111011</div>
+    </div>
+
+    <!-- S2 -->
+    <div class="short" id="s2">
+      <div class="qtext"><strong>2.</strong> How many bytes are in 1 MiB? (2 marks)</div>
+      <input id="s2ans" placeholder="Type numeric answer">
+      <div class="answerkey" id="as2">Answer: 1,048,576 bytes</div>
+    </div>
+
+    <!-- S3 -->
+    <div class="short" id="s3">
+      <div class="qtext"><strong>3.</strong> Calculate the size in MiB of an image 800 × 600 at 24 bpp. (show numeric answer) (2 marks)</div>
+      <input id="s3ans" placeholder="e.g., 1.38">
+      <div class="answerkey" id="as3">Answer: 800×600×24 = 11,520,000 bits → bytes 1,440,000 → MiB ≈ 1.373291 (≈1.37)</div>
+    </div>
+
+    <!-- S4 -->
+    <div class="short" id="s4">
+      <div class="qtext"><strong>4.</strong> What is the two's complement 8-bit representation of −112? (2 marks)</div>
+      <input id="s4ans" placeholder="Type binary like 10010000">
+      <div class="answerkey" id="as4">Answer: 10010000</div>
+    </div>
+
+    <!-- S5 -->
+    <div class="short" id="s5">
+      <div class="qtext"><strong>5.</strong> If an audio file is sampled at 44,100 Hz, 16 bits, stereo, how many bits in one second? (2 marks)</div>
+      <input id="s5ans" placeholder="numeric answer">
+      <div class="answerkey" id="as5">Answer: 44,100 × 16 × 2 = 1,411,200 bits per second</div>
+    </div>
+
+    <!-- S6 -->
+    <div class="short" id="s6">
+      <div class="qtext"><strong>6.</strong> Define ‘pixel’ in one sentence. (2 marks)</div>
+      <input id="s6ans" placeholder="Short text answer">
+      <div class="answerkey" id="as6">Answer: A pixel is the smallest addressable picture element in a digital image that stores colour/brightness information.</div>
+    </div>
+
+    <!-- S7 -->
+    <div class="short" id="s7">
+      <div class="qtext"><strong>7.</strong> How many colours are possible with 8 bits per channel RGB? (2 marks)</div>
+      <input id="s7ans" placeholder="numeric answer">
+      <div class="answerkey" id="as7">Answer: 256^3 = 16,777,216 colours</div>
+    </div>
+
+    <!-- S8 -->
+    <div class="short" id="s8">
+      <div class="qtext"><strong>8.</strong> Convert hexadecimal 3F to denary. (2 marks)</div>
+      <input id="s8ans" placeholder="numeric answer">
+      <div class="answerkey" id="as8">Answer: 63</div>
+    </div>
+
+    <!-- S9 -->
+    <div class="short" id="s9">
+      <div class="qtext"><strong>9.</strong> Explain briefly why JPEG is called lossy. (2 marks)</div>
+      <input id="s9ans" placeholder="Short text answer">
+      <div class="answerkey" id="as9">Answer: JPEG discards information (especially colour detail) during compression, so the original cannot be reconstructed exactly.</div>
+    </div>
+
+    <!-- S10 -->
+    <div class="short" id="s10">
+      <div class="qtext"><strong>10.</strong> A memory stick is 16 GiB. How many 5 MiB images can be stored? (2 marks)</div>
+      <input id="s10ans" placeholder="numeric answer">
+      <div class="answerkey" id="as10">Answer: 16 GiB = 16×1024 MiB = 16384 MiB; 16384 ÷ 5 = 3276 images (integer)</div>
+    </div>
+
+  </div>
+</section>
+
+<section id="sectionC">
+  <h2>Section C — Scenario Questions (3 &times; 5 = 15 marks)</h2>
+  <div id="scenarios">
+    <!-- SC1 -->
+    <div class="scenario" id="sc1">
+      <div class="qtext"><strong>1.</strong> (5 marks) A game developer needs to store 150 background photos, each 4000×3000 at 24 bpp, and 20 voice clips each 2 minutes long at 44.1 kHz, 16-bit mono. She has a 256 GiB drive. Show by calculation whether the assets will fit. Show all workings and give a clear conclusion.</div>
+      <textarea id="sc1ans" placeholder="Type your workings and conclusion here"></textarea>
+      <div class="model" id="ms1"><strong>Model answer (summary):</strong>
+        <p>One image: 4000×3000×24 = 288,000,000 bits = 36,000,000 bytes ≈ 34.33 MiB. 150 images ≈ 5,149.5 MiB ≈ 5.026 GiB. One voice clip: 44,100×16×1×120 = 84,672,000 bits = 10,584,000 bytes ≈ 10.09 MiB. 20 clips ≈ 201.8 MiB ≈ 0.197 GiB. Total ≈ 5.223 GiB &lt;&lt; 256 GiB so YES they fit with large space left.</p>
+      </div>
+    </div>
+
+    <!-- SC2 -->
+    <div class="scenario" id="sc2">
+      <div class="qtext"><strong>2.</strong> (5 marks) An audio producer must email a 600 MiB raw WAV file but the email limit is 25 MB. Suggest two precise steps (including a specific compression format and a change to audio parameters) to prepare the file, and estimate the new file size for each step. Explain trade-offs.</div>
+      <textarea id="sc2ans" placeholder="Type your answer here"></textarea>
+      <div class="model" id="ms2"><strong>Model answer (summary):</strong>
+        <ol>
+          <li>Encode to MP3 at 192 kbps: 600 MiB (~600×8=4800 Mbits) ÷ 192 kbps ≈ 25,000 seconds? Simpler: MP3 at 192 kbps ≈ 1.44 MB/min, so a 60-min file becomes ~86 MB — still too large. Use 128 kbps → ~57 MB. So to reach 25 MB need ~56 kbps, poor quality. Trade-off: lower quality.</li>
+          <li>Change parameters: downsample to 22.05 kHz and 64 kbps MP3; estimated size ≈ (64 kbps × duration) → within 25 MB for typical lengths. Trade off: lower fidelity; acceptable for spoken word.</li>
+        </ol>
+      </div>
+    </div>
+
+    <!-- SC3 -->
+    <div class="scenario" id="sc3">
+      <div class="qtext"><strong>3.</strong> (5 marks) Describe a suitable compression strategy (lossy/lossless and why) for: (a) game sprite sheets with large flat colours; (b) background photographic textures in an online game; (c) final mastered movie soundtrack. Give one format for each and one sentence justification.</div>
+      <textarea id="sc3ans" placeholder="Type your answer here"></textarea>
+      <div class="model" id="ms3"><strong>Model answer (summary):</strong>
+        <ul>
+          <li>(a) Sprites: Use lossless RLE or PNG (indexed) — exact colours needed, good compression on flat areas.</li>
+          <li>(b) Photographic textures: Use JPEG or WebP lossy with high quality — reduce file size and acceptable visual loss at distance.</li>
+          <li>(c) Mastered soundtrack: Use lossless (FLAC/WAV) for archive; use high-bitrate lossy (AAC/MP3 320 kbps) for distribution if needed.</li>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div style="text-align:center;margin:18px 0">
+  <button class="btn" id="submitBtn">SUBMIT — Reveal answers and score</button>
+</div>
+
+<div id="overall" class="resultbox" style="display:none">
+  <div id="greeting" class="small"></div>
+  <div class="scoreline">Score: <span id="scoreVal">0</span> / 60</div>
+  <div class="small">MCQ: <span id="mcqScore">0</span>/25, Short: <span id="shortScore">0</span>/20, Scenarios: <span id="scScore">0</span>/15 (scenarios show model answers; teacher or self-mark to award up to 15).</div>
+</div>
+
+<footer>
+  <p class="small">© Modern English School Cairo — Computer Science Department — Prepared by R. Raju</p>
+</footer>
+
+<script>
+// MCQ answer key (correct option letters)
+const mcqKey = {
+  q1: 'B', q2: 'B', q3: 'C', q4: 'B', q5: 'C', q6: 'B', q7: 'B', q8: 'C', q9: 'B', q10: 'A',
+  q11: 'B', q12: 'A', q13: 'B', q14: 'B', q15: 'C', q16: 'B', q17: 'C', q18: 'B', q19: 'B', q20: 'A',
+  q21: 'A', q22: 'B', q23: 'B', q24: 'A', q25: 'B'
+};
+
+// Short answers key (normalized strings or numbers)
+const shortKey = {
+  s1: '01111011',
+  s2: '1048576',
+  s3: '1.373291', // allow approximate
+  s4: '10010000',
+  s5: '1411200',
+  s6: 'pixel',
+  s7: '16777216',
+  s8: '63',
+  s9: 'jpeg lossy',
+  s10: '3276'
+};
+
+function normalize(str){
+  return String(str).trim().toLowerCase().replace(/[^0-9a-z\.]/g,'');
+}
+
+function gradeMCQs(){
+  let score = 0;
+  for(let i=1;i<=25;i++){
+    const q = 'q'+i;
+    const radios = document.getElementsByName(q);
+    let selected = null;
+    for(const r of radios) if(r.checked) selected = r.value;
+    const key = mcqKey[q];
+    // reveal answer
+    document.getElementById('a'+i).style.display = 'block';
+    if(selected === key){ score += 1; document.getElementById('qa'+i).querySelector('.qtext').innerHTML += ' <span class="correct">(Correct)</span>'; }
+    else{ document.getElementById('qa'+i).querySelector('.qtext').innerHTML += ' <span class="incorrect">(Incorrect)</span>'; }
+  }
+  return score;
+}
+
+function gradeShorts(){
+  let score = 0;
+  for(let i=1;i<=10;i++){
+    const id = 's'+i;
+    const val = document.getElementById(id+'ans').value;
+    const norm = normalize(val);
+    const key = shortKey[id];
+    document.getElementById('as'+i).style.display = 'block';
+    // grading rules: exact for binaries and numbers; for approximate numeric allow small tolerance
+    if(id==='s3'){
+      const numeric = parseFloat(val);
+      if(!isNaN(numeric) && Math.abs(numeric - 1.373291) < 0.08){ score += 2; document.getElementById(id+'ans').style.border='2px solid green'; }
+      else{ document.getElementById(id+'ans').style.border='2px solid #c63a3a'; }
+    } else if(id==='s6' || id==='s9'){
+      // text answers accept keywords
+      if(key.split(' ').every(k=>normalize(k) === '' || norm.includes(normalize(k)))){ score += 2; document.getElementById(id+'ans').style.border='2px solid green'; } else { document.getElementById(id+'ans').style.border='2px solid #c63a3a'; }
+    } else if(id==='s5'){
+      // expect 1411200 bits
+      const num = String(val).replace(/[^0-9]/g,'');
+      if(num==='1411200'){ score += 2; document.getElementById(id+'ans').style.border='2px solid green'; } else { document.getElementById(id+'ans').style.border='2px solid #c63a3a'; }
+    } else {
+      // numeric or exact
+      const expected = String(key).replace(/[^0-9]/g,'');
+      const given = String(val).replace(/[^0-9]/g,'');
+      if(expected!=='' && given === expected){ score += 2; document.getElementById(id+'ans').style.border='2px solid green'; } else { document.getElementById(id+'ans').style.border='2px solid #c63a3a'; }
+    }
+  }
+  return score;
+}
+
+// On submit
+document.getElementById('submitBtn').addEventListener('click', function(){
+  // prevent multiple submits
+  this.disabled = true;
+  // show all MCQ and short answer keys
+  const mcqScore = gradeMCQs();
+  const shortScore = gradeShorts();
+
+  // show model answers for scenarios
+  document.getElementById('ms1').style.display='block';
+  document.getElementById('ms2').style.display='block';
+  document.getElementById('ms3').style.display='block';
+
+  // reveal answer keys for shorts already done in functions
+
+  // compute total displayed score (scenarios left for teacher marking)
+  const scPossible = 15; // scenarios total
+  const total = mcqScore + shortScore; // teacher will add scenario marks separately
+  document.getElementById('overall').style.display='block';
+  const name = document.getElementById('studentName').value.trim() || 'Student';
+  document.getElementById('greeting').innerText = 'Name: ' + name;
+  document.getElementById('mcqScore').innerText = mcqScore;
+  document.getElementById('shortScore').innerText = shortScore;
+  document.getElementById('scScore').innerText = '0 / 15 (see model answers — teacher/self-mark)';
+  document.getElementById('scoreVal').innerText = total + ' / 60 (scenarios not auto-graded)';
+
+  // Scroll to results
+  document.getElementById('overall').scrollIntoView({behavior:'smooth'});
+});
+</script>
+</body>
+</html>

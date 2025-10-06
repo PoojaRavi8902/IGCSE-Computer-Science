@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>IGCSE 0984 — Chapter 1.3: Data Storage & File Compression (Exam-ready)</title>
+  <style>
+    body{font-family: 'Times New Roman', Times, serif; line-height:1.5; margin:18px; color:#222}
+    header{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #2b6ea3;padding-bottom:8px;margin-bottom:12px}
+    header h1{color:#0b3b5a;margin:0}
+    .logo{height:56px}
+    nav{margin:10px 0}
+    nav a{margin-right:12px;color:#0b3b5a;text-decoration:none;font-weight:600}
+    section{margin-bottom:20px;padding:14px;border-radius:8px;background:#f8fbfd;border:1px solid #e1eef6}
+    h2{color:#0b536f}
+    h3{color:#0b5b77}
+    code, pre{background:#fffbe6;padding:6px;border-radius:4px;border:1px solid #f0e6c8;display:block}
+    .example{background:#ffffff;padding:10px;border-radius:6px;border:1px dashed #c9e3f6;margin:10px 0}
+    .note{background:#fff3e0;padding:8px;border-left:4px solid #ffb74d}
+    .box{background:#fff;padding:10px;border-radius:6px;border:1px solid #dfecef}
+    .flex{display:flex;gap:12px;align-items:flex-start}
+    .col{flex:1}
+    table{border-collapse:collapse;width:100%;margin:8px 0}
+    table th, table td{border:1px solid #cfe6f5;padding:8px;text-align:left}
+    .btn{background:#0b6ea3;color:white;padding:8px 12px;border-radius:6px;border:none;cursor:pointer}
+    .small{font-size:0.9em;color:#444}
+    .answer{background:#eef7ee;border-left:4px solid #5ab66a;padding:8px;margin-top:6px;display:none}
+    .reveal{color:#0b6ea3;cursor:pointer;text-decoration:underline}
+    details{margin:8px 0}
+    .calc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+    @media(max-width:800px){.calc{grid-template-columns:1fr}}
+    footer{border-top:2px solid #d6eaf5;padding-top:10px;margin-top:20px;color:#555}
+    .quiz .result{font-weight:700;margin-top:8px}
+    .svg-border{border:1px solid #cfe6f5;background:white;padding:6px;border-radius:6px}
+  </style>
+</head>
+<body>
+<header>
+  <h1>IGCSE 0984 — Chapter 1.3: Data Storage & File Compression</h1>
+  <img src="/files/87fa6107-ff56-4f44-bdf0-7ec4e06b1fb7.png" alt="MES Logo" class="logo">
+</header>
+<nav>
+  <a href="#measurement">Measurement</a>
+  <a href="#images">Image file size</a>
+  <a href="#sound">Sound file size</a>
+  <a href="#compression">Compression</a>
+  <a href="#extension">Extension</a>
+  <a href="#practice">Practice & Exam</a>
+</nav>
+
+<section id="measurement">
+  <h2>1.3.1 Measurement of data storage — fundamental ideas</h2>
+  <p>A <strong>bit</strong> is the most basic unit of data: it can be <code>0</code> or <code>1</code>. The word comes from <em>binary digit</em>.
+  A <strong>byte</strong> is 8 bits. A <strong>nibble</strong> is 4 bits (half a byte).</p>
+
+  <div class="flex">
+    <div class="col box">
+      <h3>Two sizing systems</h3>
+      <p><strong>SI (decimal)</strong> — used by some storage manufacturers:</p>
+      <table>
+        <tr><th>Name</th><th>Denary value (bytes)</th></tr>
+        <tr><td>1 KB</td><td>1,000 bytes</td></tr>
+        <tr><td>1 MB</td><td>1,000,000 bytes</td></tr>
+        <tr><td>1 GB</td><td>1,000,000,000 bytes</td></tr>
+      </table>
+      <p class="small">This is convenient for marketing but <strong>not</strong> the system used for computer memory arithmetic.</p>
+    </div>
+    <div class="col box">
+      <h3>IEC (binary) — used in this syllabus</h3>
+      <table>
+        <tr><th>Name</th><th>Bytes</th><th>2^n</th></tr>
+        <tr><td>1 KiB</td><td>1,024</td><td>2<sup>10</sup></td></tr>
+        <tr><td>1 MiB</td><td>1,048,576</td><td>2<sup>20</sup></td></tr>
+        <tr><td>1 GiB</td><td>1,073,741,824</td><td>2<sup>30</sup></td></tr>
+      </table>
+      <p class="small">Use KiB/MiB/GiB when working on RAM, ROM and file-size arithmetic for exams.</p>
+    </div>
+  </div>
+
+  <div class="example">
+    <strong>Quick worked example:</strong> How many bytes in 64 GiB?<br>
+    <em>Solution:</em> 64 × 2<sup>30</sup> = 64 × 1,073,741,824 = <strong>68,719,476,736 bytes</strong>.
+  </div>
+
+  <details>
+    <summary><strong>Interactive conversion: bits ↔ bytes ↔ MiB ↔ GiB</strong></summary>
+    <div class="calc">
+      <div>
+        <label>Enter bits: <input type="number" id="bitsIn" value="0"></label><br>
+        <button class="btn" onclick="convertBits()">Convert</button>
+      </div>
+      <div id="convOut" class="box small">Results appear here.</div>
+    </div>
+  </details>
+</section>
+
+<section id="images">
+  <h2>1.3.2 Calculation of image file size — detailed</h2>
+  <p>Uncompressed bitmap images store the colour of every pixel. Two important numbers:</p>
+  <ul>
+    <li><strong>Resolution</strong> = width × height (pixels)</li>
+    <li><strong>Colour depth</strong> = bits per pixel (bpp) — how many bits used to describe each pixel's colour.</li>
+  </ul>
+  <p class="note">Formula (uncompressed bitmap):
+    <code>File size (bits) = width × height × colour depth</code>
+    Then <code>bytes = bits ÷ 8</code>, and <code>MiB = bytes ÷ 1,048,576</code>.</p>
+
+  <h3>Visual guide — how pixels and colour depth relate</h3>
+  <div class="flex">
+    <div class="col svg-border" style="text-align:center;padding:6px">
+      <p><strong>8×8 pixel grid (each square = one pixel)</strong></p>
+      <!-- Inline SVG of 8x8 grid where filled squares are black to show the letter F -->
+      <svg width="240" height="240" viewBox="0 0 8 8" preserveAspectRatio="xMidYMid meet">
+        <rect x="0" y="0" width="8" height="8" fill="#ffffff" stroke="#ccc"/>
+        <!-- pattern for letter F (1=white,0=black) lives here -->
+        <g transform="scale(1)">
+          <!-- draw unit squares -->
+          <rect x="0" y="0" width="1" height="1" fill="#ffffff" stroke="#ccc"/>
+        </g>
+      </svg>
+      <p class="small">Each pixel stores colour. At 24 bpp (true colour) each pixel uses 3 bytes (red, green, blue).</p>
+    </div>
+    <div class="col box">
+      <h3>Colour depth examples</h3>
+      <ul>
+        <li><strong>8 bpp</strong> — 256 colours (1 byte per pixel)</li>
+        <li><strong>16 bpp</strong> — 65,536 colours</li>
+        <li><strong>24 bpp</strong> — True colour (16,777,216 colours) — 3 bytes per pixel</li>
+        <li><strong>32 bpp</strong> — Often includes alpha channel (RGBA) — 4 bytes per pixel</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+  <h3>Worked examples — one per slide (expanded here)</h3>
+
+  <article class="example">
+    <h4>Example 1 — Small icon (256 × 256, 8-bit)</h4>
+    <p>Step 1: Pixels = 256 × 256 = 65,536 pixels.<br>
+    Step 2: Bits = pixels × colour depth = 65,536 × 8 = 524,288 bits.<br>
+    Step 3: Bytes = 524,288 ÷ 8 = 65,536 bytes.<br>
+    Step 4: In KiB = 65,536 ÷ 1024 = 64 KiB. In MiB = 64 ÷ 1024 = 0.0625 MiB.</p>
+    <p class="small">Tip: small graphics for UI use low colour depth to save storage and memory.</p>
+  </article>
+
+  <article class="example">
+    <h4>Example 2 — HD photo (1920 × 1080, 24-bit)</h4>
+    <p>Step 1: Pixels = 1920 × 1080 = 2,073,600.<br>
+    Step 2: Bits = 2,073,600 × 24 = 49,766,400 bits.<br>
+    Step 3: Bytes = 49,766,400 ÷ 8 = 6,220,800 bytes.<br>
+    Step 4: MiB = 6,220,800 ÷ 1,048,576 ≈ <strong>5.93 MiB</strong>.</p>
+    <p class="small">Exam-style question: If you have a 16 GiB card, how many such HD photos can you store? (Show the steps.)</p>
+    <div class="answer" id="ex2Ans">Answer hint: convert 16 GiB to bytes first (16 × 2^30) then divide by bytes per photo.</div>
+    <p><span class="reveal" onclick="document.getElementById('ex2Ans').style.display='block'">Show hint</span></p>
+  </article>
+
+  <article class="example">
+    <h4>Example 3 — Camera image (4000 × 3000, 32-bit)</h4>
+    <p>Step 1: Pixels = 4000 × 3000 = 12,000,000.<br>
+    Step 2: Bits = 12,000,000 × 32 = 384,000,000 bits.<br>
+    Step 3: Bytes = 384,000,000 ÷ 8 = 48,000,000 bytes.<br>
+    Step 4: MiB = 48,000,000 ÷ 1,048,576 ≈ <strong>45.78 MiB</strong>.<br>
+    Step 5: How many images on 1 GiB (≈1,073,741,824 bytes)? 1,073,741,824 ÷ 48,000,000 ≈ 22.37 → so a 1 GiB card holds <strong>22 images</strong> (full images only).
+    </p>
+  </article>
+
+  <details>
+    <summary><strong>Image file size calculator (interactive)</strong></summary>
+    <div class="calc">
+      <div class="box">
+        <label>Width (pixels): <input id="imgW" type="number" value="1920"></label><br>
+        <label>Height (pixels): <input id="imgH" type="number" value="1080"></label><br>
+        <label>Colour depth (bits per pixel): <input id="imgBPP" type="number" value="24"></label><br>
+        <label>Storage size (GiB) to check: <input id="imgStorage" type="number" value="1"></label><br>
+        <button class="btn" onclick="calcImage()">Calculate</button>
+      </div>
+      <div class="box" id="imgCalcOut">Result will appear here.</div>
+    </div>
+  </details>
+</section>
+
+<section id="sound">
+  <h2>1.3.2 Calculation of sound file size — detailed</h2>
+  <p>Digital sound is produced by taking samples of an analogue waveform at regular intervals.</p>
+  <ul>
+    <li><strong>Sample rate</strong> (Hz): number of samples per second (e.g., 44,100 Hz = 44.1 kHz)</li>
+    <li><strong>Sample resolution (bit depth)</strong>: bits used per sample (e.g., 16 bits)</li>
+    <li><strong>Channels</strong>: mono = 1, stereo = 2</li>
+  </ul>
+  <p class="note">Formula:
+  <code>File size (bits) = sample rate × sample resolution × channels × length (s)</code>
+  Then <code>bytes = bits ÷ 8</code>, and convert to MiB by ÷1,048,576.</p>
+
+  <h3>Visual — sampling concept</h3>
+  <div class="flex">
+    <div class="col svg-border">
+      <p class="small">Waveform sampling demonstration (continuous wave + sample points)</p>
+      <!-- Inline waveform SVG simplified illustration -->
+      <svg width="360" height="120" viewBox="0 0 360 120" xmlns="http://www.w3.org/2000/svg">
+        <rect width="360" height="120" fill="#ffffff" stroke="#dbeffd"/>
+        <!-- continuous waveform (sine-like) -->
+        <path d="M0,60 C30,20 60,100 90,60 120,20 150,100 180,60 210,20 240,100 270,60 300,20 330,100 360,60" stroke="#1f5e8a" fill="none" stroke-width="2"/>
+        <!-- sample points for 44k (dense) shown as small circles -->
+        <g fill="#c33a3a">
+          <circle cx="20" cy="45" r="3"/>
+          <circle cx="40" cy="75" r="3"/>
+          <circle cx="60" cy="52" r="3"/>
+          <circle cx="80" cy="63" r="3"/>
+          <circle cx="100" cy="46" r="3"/>
+          <circle cx="120" cy="76" r="3"/>
+        </g>
+      </svg>
+    </div>
+    <div class="col box">
+      <h4>Common sample rates</h4>
+      <ul>
+        <li>8 kHz — telephone quality</li>
+        <li>22.05 kHz — low quality voice/music</li>
+        <li>44.1 kHz — CD quality</li>
+        <li>48 kHz — professional audio and video</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr>
+  <h3>Worked examples — each on its own expanded section</h3>
+
+  <article class="example">
+    <h4>Example 1 — Mono, 10 s, 22 kHz, 8-bit</h4>
+    <p>Bits = 22,000 × 8 × 1 × 10 = 1,760,000 bits.<br>
+    Bytes = 1,760,000 ÷ 8 = 220,000 bytes ≈ 0.21 MiB.</p>
+    <p class="small">Use: voice memos or low-quality recordings where file size is most important.</p>
+  </article>
+
+  <article class="example">
+    <h4>Example 2 — Stereo, 60 s, 44.1 kHz, 16-bit (audio CD)</h4>
+    <p>Bits = 44,100 × 16 × 2 × 60 = 84,672,000 bits.<br>
+    Bytes = 10,584,000 ≈ <strong>10.09 MiB</strong>.</p>
+    <p class="small">This matches the textbook example and is a useful estimate for calculating album size.</p>
+  </article>
+
+  <article class="example">
+    <h4>Example 3 — High-quality stereo, 180 s, 48 kHz, 24-bit</h4>
+    <p>Bits = 48,000 × 24 × 2 × 180 = 414,720,000 bits.<br>
+    Bytes = 51,840,000 ≈ <strong>49.45 MiB</strong>.</p>
+    <p class="small">Used for pro audio; note this is uncompressed PCM data — real file sizes may be larger due to file headers.</p>
+  </article>
+
+  <details>
+    <summary><strong>Sound file size calculator (interactive)</strong></summary>
+    <div class="calc">
+      <div class="box">
+        <label>Sample rate (Hz): <input id="sr" type="number" value="44100"></label><br>
+        <label>Bit depth: <input id="bd" type="number" value="16"></label><br>
+        <label>Channels: <input id="ch" type="number" value="2"></label><br>
+        <label>Length (seconds): <input id="len" type="number" value="60"></label><br>
+        <button class="btn" onclick="calcSound()">Calculate</button>
+      </div>
+      <div class="box" id="soundCalcOut">Sound calculation result appears here.</div>
+    </div>
+  </details>
+</section>
+
+<section id="compression">
+  <h2>1.3.3 &amp; 1.3.4 — Data compression, lossy vs lossless</h2>
+  <p>Compression reduces file size for storage and transmission. Two main categories:</p>
+  <ul>
+    <li><strong>Lossy:</strong> reduces detail permanently (e.g., MP3 for audio, JPEG for images). Smaller files but quality lost.</li>
+    <li><strong>Lossless:</strong> original data can be perfectly reconstructed (e.g., ZIP, PNG, RLE).</li>
+  </ul>
+
+  <div class="flex">
+    <div class="col box">
+      <h3>Why compress?</h3>
+      <ol>
+        <li>Save storage space (HDD/SSD/cloud costs)</li>
+        <li>Reduce transfer time (upload/download)</li>
+        <li>Lower bandwidth usage when streaming</li>
+        <li>Reduce cost when data is metered</li>
+      </ol>
+    </div>
+    <div class="col box">
+      <h3>Common formats</h3>
+      <ul>
+        <li>JPEG — lossy for photos</li>
+        <li>MP3/MP4 — lossy audio/video</li>
+        <li>PNG — lossless images (uses filters + DEFLATE compression)</li>
+        <li>ZIP — general-purpose lossless compression</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>How MP3 (lossy) works — very short intuition</h3>
+  <p class="small">MP3 uses psychoacoustic models: it removes frequencies the human ear is unlikely to hear, and removes sounds masked by louder ones. This is called <em>perceptual coding</em>. The result: often 90% size reduction with acceptable listening quality.</p>
+
+  <h3>Run-Length Encoding (RLE) — simple lossless method</h3>
+  <p>RLE compresses long runs of the same value by storing a count and the value. Effective on images with large flat areas or text with repeated characters.</p>
+  <div class="example">
+    <strong>Text example:</strong> 'aaaaabbbbccddddd' originally 16 bytes.
+    <p>RLE: 05 97 04 98 02 99 05 100 (count + ASCII code). Stored as 8 bytes — 50% reduction in this case.</p>
+  </div>
+
+  <div class="flex">
+    <div class="col svg-border">
+      <p><strong>Original photo</strong></p>
+      <img src="/files/orig_photo.png" alt="original" style="max-width:100%">
+    </div>
+    <div class="col svg-border">
+      <p><strong>Compressed (downsampled upsampled) example</strong></p>
+      <img src="/files/compressed_photo.png" alt="compressed" style="max-width:100%">
+    </div>
+  </div>
+
+  <details>
+    <summary><strong>Interactive RLE encoder/decoder</strong></summary>
+    <div class="box">
+      <label>Enter string to encode: <input id="rleIn" value="aaaaabbbbccddddd"></label>
+      <button class="btn" onclick="rleEncode()">Encode</button>
+      <div id="rleOut" class="box small">Encoded output</div>
+      <hr>
+      <label>Enter RLE encoded (count:value pairs comma-separated) e.g. 5:a,4:b: <input id="rleIn2" value="5:a,4:b,2:c,5:d"></label>
+      <button class="btn" onclick="rleDecode()">Decode</button>
+      <div id="rleOut2" class="box small">Decoded output</div>
+    </div>
+  </details>
+</section>
+
+<section id="extension">
+  <h2>Extension — Binary Coded Decimal (BCD) &amp; Two's Complement subtraction</h2>
+  <div class="box">
+    <h3>BCD — short intro</h3>
+    <p>In BCD each decimal digit is stored as its 4-bit binary equivalent. Useful in calculators and displays where decimal digits need separate encoding.</p>
+    <p><strong>Example:</strong> 3165 in BCD = 0011 0001 0110 0101 (3 → 0011, 1 → 0001, 6 → 0110, 5 → 0101).</p>
+  </div>
+
+  <div class="box">
+    <h3>Two's complement subtraction — short guide</h3>
+    <p>To compute A − B using two's complement: convert B to its two's complement (invert bits, add 1) then add to A. If overflow occurs beyond the fixed bit-width, discard the carry.</p>
+    <p><strong>Worked example:</strong> 95 − 68 using 8-bit.
+      95 = 01011111, 68 = 01000100 → two's complement of 68 = 10111100 (invert then +1). Add: 01011111 + 10111100 = 1 00011011 → discard leading 1 → 00011011 = 27 (correct).</p>
+  </div>
+</section>
+
+<section id="practice">
+  <h2>Practice, exam-style questions &amp; interactive quiz</h2>
+  <div class="box">
+    <h3>Activity set A — image &amp; sound quick questions</h3>
+    <ol>
+      <li>A camera detector has an array of 1920 × 1536 pixels. A colour depth of 16 bits is used. Calculate the size of the photo in MiB.</li>
+      <li>Smartphone uses 1024 × 1536 pixels at 24-bit. How many photos fit on a 16 GiB card?</li>
+      <li>Audio sampled at 44.1 kHz using 8 bits, two channels. a) size of one-second sample in bits b) size of 30-second recording in MiB.</li>
+      <li>How many 3 min 30 s songs (44.1 kHz, 16-bit, stereo) fit on a 740 MiB CD?</li>
+    </ol>
+    <p class="small">Answers are below — try to work them out first, show workings, then reveal answers.</p>
+    <button class="btn" onclick="document.getElementById('answersA').style.display='block'">Reveal answers</button>
+    <div id="answersA" class="answer">
+      <ol>
+        <li>1920×1536=2,949,120 ×16=47,185,920 bits → ÷8 = 5,898,240 bytes → ÷1,048,576 ≈ <strong>5.625 MiB</strong>.</li>
+        <li>1024×1536=1,572,864 ×24=37,748,736 bits → ÷8 = 4,718,592 bytes. 16 GiB = 16×2^30 = 17,179,869,184 bytes → photos ≈ 17,179,869,184 ÷ 4,718,592 ≈ <strong>3,642 photos</strong>.</li>
+        <li>a) 44,100×8×2×1 = 705,600 bits. b) 705,600×30=21,168,000 bits → ÷8=2,646,000 bytes ≈ ÷1,048,576 ≈ <strong>2.52 MiB</strong>.</li>
+        <li>One song: 44,100×16×2×210=295,680,000 bits → bytes = 36,960,000 ≈ 35.25 MiB. 740 ÷ 35.25 ≈ <strong>20 songs</strong>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="box">
+    <h3>Exam-style scenario question</h3>
+    <p>Elke, a student, must store a set of raw camera images (4000×3000 pixels, 24-bit) and a set of audio interviews (each 10 minutes, stereo, 44.1kHz, 16-bit). She has a 64 GiB drive. Show step-by-step whether she can store 200 photos and 10 interviews together. (Write clear workings for each part.)</p>
+    <p class="small">Use the calculators above or do by hand; examiners look for correct method, units and clear stepwise conversion.</p>
+  </div>
+
+  <div class="box quiz">
+    <h3>Interactive quiz — instant feedback</h3>
+    <p>1) 1 GiB = ? bytes</p>
+    <input id="q1" placeholder="Type answer (digits only)"> <button class="btn" onclick="grade1()">Check</button>
+    <div id="q1res" class="result small"></div>
+
+    <p>2) Calculate size (MiB) of 1280×720 24-bit image</p>
+    <input id="q2" placeholder="Type numeric answer, e.g., 2.63"> <button class="btn" onclick="grade2()">Check</button>
+    <div id="q2res" class="result small"></div>
+
+    <p>3) Which compression gives exact original after decompression?</p>
+    <select id="q3"><option value="">--select--</option><option value="lossy">Lossy</option><option value="lossless">Lossless</option></select>
+    <button class="btn" onclick="grade3()">Check</button>
+    <div id="q3res" class="result small"></div>
+
+  </div>
+</section>
+
+<footer>
+  <p>© Modern English School Cairo — Computer Science Department — Prepared by R. Raju</p>
+  <p class="small">This page is exam-focused and contains interactive calculators and worked examples for revision. Use in-class or as student revision notes.</p>
+</footer>
+
+<script>
+// Conversion utility
+function convertBits(){
+  const bits = Number(document.getElementById('bitsIn').value) || 0;
+  const bytes = bits/8;
+  const kib = bytes/1024;
+  const mib = bytes/1048576;
+  const gib = bytes/1073741824;
+  document.getElementById('convOut').innerHTML = `Bytes: ${bytes.toLocaleString()}<br>KiB: ${kib.toFixed(4)}<br>MiB: ${mib.toFixed(6)}<br>GiB: ${gib.toFixed(9)}`;
+}
+
+// Image calculator
+function calcImage(){
+  const w = Number(document.getElementById('imgW').value)||0;
+  const h = Number(document.getElementById('imgH').value)||0;
+  const bpp = Number(document.getElementById('imgBPP').value)||0;
+  const storageGiB = Number(document.getElementById('imgStorage').value)||0;
+  const pixels = w*h;
+  const bits = pixels * bpp;
+  const bytes = bits/8;
+  const mib = bytes/1048576;
+  const storageBytes = storageGiB * 1073741824;
+  const fit = Math.floor(storageBytes/bytes);
+  document.getElementById('imgCalcOut').innerHTML = `Pixels: ${pixels.toLocaleString()}<br>Bits: ${bits.toLocaleString()}<br>Bytes: ${bytes.toLocaleString()}<br>MiB: ${mib.toFixed(3)}<br>Images that fit in ${storageGiB} GiB: ${isFinite(fit)?fit:'N/A'}`;
+}
+
+// Sound calculator
+function calcSound(){
+  const sr = Number(document.getElementById('sr').value)||0;
+  const bd = Number(document.getElementById('bd').value)||0;
+  const ch = Number(document.getElementById('ch').value)||0;
+  const len = Number(document.getElementById('len').value)||0;
+  const bits = sr * bd * ch * len;
+  const bytes = bits/8;
+  const mib = bytes/1048576;
+  document.getElementById('soundCalcOut').innerHTML = `Bits: ${bits.toLocaleString()}<br>Bytes: ${bytes.toLocaleString()}<br>MiB: ${mib.toFixed(3)}`;
+}
+
+// RLE encode/decode
+function rleEncode(){
+  const s = document.getElementById('rleIn').value || '';
+  if(s.length===0){document.getElementById('rleOut').innerText='Enter text.';return}
+  let res = [];
+  let count=1;
+  for(let i=1;i<=s.length;i++){
+    if(s[i]===s[i-1]){count++;} else {res.push(count+":"+s[i-1]);count=1;}
+  }
+  document.getElementById('rleOut').innerText = res.join(', ');
+}
+function rleDecode(){
+  const inStr = document.getElementById('rleIn2').value || '';
+  try{
+    const parts = inStr.split(',').map(x=>x.trim());
+    let out='';
+    parts.forEach(p=>{
+      if(p.length===0) return;
+      const [count, val] = p.split(':');
+      const n = Number(count);
+      out += val.repeat(n);
+    });
+    document.getElementById('rleOut2').innerText = out;
+  }catch(e){document.getElementById('rleOut2').innerText='Invalid input format.'}
+}
+
+// Quiz grading
+function grade1(){
+  const ans = document.getElementById('q1').value.trim();
+  const out = document.getElementById('q1res');
+  if(ans === '1073741824' || ans === '1,073,741,824') out.innerText='Correct — 1 GiB = 1,073,741,824 bytes.'; else out.innerText='Check: 1 GiB = 2^30 bytes = 1,073,741,824 bytes.';
+}
+function grade2(){
+  const ans = Number(document.getElementById('q2').value);
+  const correct = (1280*720*24)/8/1048576; // MiB
+  const out = document.getElementById('q2res');
+  if(Math.abs(ans-correct) < 0.05) out.innerText = `Correct (≈ ${correct.toFixed(2)} MiB)`; else out.innerText = `Not quite. Correct ≈ ${correct.toFixed(2)} MiB.`;
+}
+function grade3(){
+  const val = document.getElementById('q3').value;
+  const out = document.getElementById('q3res');
+  if(val==='lossless') out.innerText='Correct — lossless compression allows exact reconstruction.'; else out.innerText='Incorrect — lossless is the one that can be exactly reconstructed.';
+}
+
+// Small helpers to reveal examples
+(function(){
+  // hide answers by default — already handled via CSS display none
+})();
+</script>
+</body>
+</html>
